@@ -2,13 +2,16 @@
   "name": "jigsaw-vite",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:dev": "electron .",
+    "electron:build": "vite build & electron-builder build --config electron-builder.json"
   },
   "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
     "element-plus": "^2.4.4",
     "html2canvas": "^1.4.1",
     "vue": "^3.3.11",
@@ -17,6 +20,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
     "sass": "^1.69.5",
     "unplugin-auto-import": "^0.17.2",
     "unplugin-vue-components": "^0.26.0",

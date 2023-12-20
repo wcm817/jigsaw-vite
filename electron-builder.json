@@ -1,0 +1,14 @@
+{
+  "productName": "jigsaw",
+  "files": [
+    "./electron/main.js",
+    "./dist"
+  ],
+  "extraFiles": [
+    "./videos",
+    "./cvideo"
+  ],
+  "directories": {
+    "output": "./buileder"
+  }
+}

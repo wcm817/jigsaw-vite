@@ -18,6 +18,12 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+  server: {
+    port: 8888,
+    cors: true, // 允许跨域
+    hmr: true, // 开启热更新
+  },
+  base: './', // 配合electron打包
   resolve: {
     alias: [//配置别名
       { find: '@', replacement: resolve(__dirname, 'src') }
