@@ -33,13 +33,15 @@
               />
             </el-select>
           </div>
-          <div class="item">
+          <div class="item" v-if="!isMobile()">
             <span class="label">大小:</span>
             宽
             <el-input class="w" v-model="jissawWidth" />
             高
             <el-input class="w" v-model="jissawHeight" />
           </div>
+        </div>
+        <div class="row">
           <div class="item">
             <span class="label">间隙:</span>
             宽
@@ -73,6 +75,7 @@
 
 import Draggable from 'vuedraggable';
 import html2canvas from 'html2canvas';
+import { isMediaMobile } from '@/utils/index.js';
 
 export default {
   name: 'Home',
@@ -153,6 +156,11 @@ export default {
     }
   },
   mounted () {
+    if (this.isMobile()) {
+      this.jissawWidth = window.screen.width;
+      this.jissawHeight = window.screen.width;
+      this.splitW = 4;
+    }
   },
   methods: {
     handleSelectPics (e) {
@@ -173,7 +181,6 @@ export default {
         aLink.href = URL.createObjectURL(imgBlob);
         aLink.click();
       })
-      console.log('this.$refs.canvas:::', this.$refs.canvas.$el);
     },
     // canvas 图层转成 png图片资源
     canvasToPng (canvas) {
@@ -191,98 +198,207 @@ export default {
 
       let blob = new Blob([uInt8Array], { type: 'image/' + imageType });
       return blob;
-    }
+    },
+    isMobile: isMediaMobile
   }
 }
 </script>
-<style lang="scss" scoped>
-.row {
-  display: flex;
-  margin-bottom: 12px;
-}
-.home {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  background: #ecf5ff;
-  box-sizing: border-box;
-  padding-top: 40px;
-  color: #333;
-  :deep(.el-input__inner) {
-    color: #666;
-  }
-  .content {
-    .pic-config {
-      .item {
-        display: flex;
-        align-items: center;
-        margin-right: 20px;
-        color: #666;
-        .label {
-          margin-right: 10px;
-          color: #333;
-          white-space: nowrap;
-        }
-        .w {
-          width: 60px;
-          margin: 0 8px;
 
-          :deep(.el-input__inner) {
-            text-align: center;
+
+<style lang="scss">
+@media screen and (max-width: 750px) {
+  html,
+  body {
+    width: 100vw;
+    height: 100vh;
+  }
+  .row {
+    display: flex;
+    margin-bottom: 0.32rem;
+  }
+  .home {
+    height: 100vh;
+    background: #ecf5ff;
+    font-size: 0.37rem;
+    padding-top: 0.53rem;
+    box-sizing: border-box;
+    color: #333;
+    :deep(.el-input__inner) {
+      color: #666;
+    }
+    .content {
+      .pic-config {
+        padding: 0 0.53rem;
+        .item {
+          display: flex;
+          align-items: center;
+          margin-right: 0.53rem;
+          color: #666;
+          .label {
+            margin-right: 0.27rem;
+            color: #333;
+            white-space: nowrap;
+          }
+          .w {
+            width: 1.6rem;
+            margin: 0 0.21rem;
+
+            :deep(.el-input__inner) {
+              text-align: center;
+            }
+          }
+          .select-type {
+            width: 2.67rem;
+            color: #333;
           }
         }
-        .select-type {
-          width: 100px;
-          color: #333;
+      }
+      .select-btn {
+        width: 2.35rem;
+        height: 0.85rem;
+        position: relative;
+        margin-right: 0.53rem;
+
+        button {
+          width: 100%;
+        }
+        input {
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .export-btn {
+        background-color: #ecf5ff;
+        color: #409eff;
+        border-color: #409eff;
+      }
+      .pics-layout {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        .water-mask {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 20px;
+          color: rgba(143, 142, 142, 0.1);
+        }
+        .pics {
+          display: flex;
+          justify-content: space-between;
+          align-content: space-between;
+          flex-wrap: wrap;
+          box-sizing: border-box;
+          .img-box {
+            background-color: #fff;
+            img {
+              display: block;
+              width: 100%;
+              height: 100%;
+            }
+          }
         }
       }
     }
-    .select-btn {
-      width: 88px;
-      height: 32px;
-      position: relative;
-      margin-right: 20px;
-      button {
-        width: 100%;
-      }
-      input {
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        width: 100%;
-        height: 100%;
-      }
+  }
+}
+</style>
+<style lang="scss" scoped>
+@media screen and (min-width: 751px) {
+  .row {
+    display: flex;
+    margin-bottom: 12px;
+  }
+  .home {
+    max-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: #ecf5ff;
+    box-sizing: border-box;
+    padding-top: 40px;
+    color: #333;
+    :deep(.el-input__inner) {
+      color: #666;
     }
-    .export-btn {
-      background-color: #ecf5ff;
-      color: #409eff;
-      border-color: #409eff;
-    }
-    .pics-layout {
-      position: relative;
-      display: inline-block;
-      overflow: hidden;
-      .water-mask {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 20px;
-        color: rgba(143, 142, 142, 0.1);
+    .content {
+      .pic-config {
+        .item {
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+          color: #666;
+          .label {
+            margin-right: 10px;
+            color: #333;
+            white-space: nowrap;
+          }
+          .w {
+            width: 60px;
+            margin: 0 8px;
+
+            :deep(.el-input__inner) {
+              text-align: center;
+            }
+          }
+          .select-type {
+            width: 100px;
+            color: #333;
+          }
+        }
       }
-      .pics {
-        display: flex;
-        justify-content: space-between;
-        align-content: space-between;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-        .img-box {
-          background-color: #fff;
-          img {
-            display: block;
-            width: 100%;
-            height: 100%;
+      .select-btn {
+        width: 88px;
+        height: 32px;
+        position: relative;
+        margin-right: 20px;
+        button {
+          width: 100%;
+        }
+        input {
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .export-btn {
+        background-color: #ecf5ff;
+        color: #409eff;
+        border-color: #409eff;
+      }
+      .pics-layout {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        .water-mask {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 20px;
+          color: rgba(143, 142, 142, 0.1);
+        }
+        .pics {
+          display: flex;
+          justify-content: space-between;
+          align-content: space-between;
+          flex-wrap: wrap;
+          box-sizing: border-box;
+          .img-box {
+            background-color: #fff;
+            img {
+              display: block;
+              width: 100%;
+              height: 100%;
+            }
           }
         }
       }
