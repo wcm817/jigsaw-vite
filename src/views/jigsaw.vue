@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="jigsaw">
     <div class="content">
       <div class="pic-config">
         <div class="row">
@@ -78,7 +78,7 @@ import html2canvas from 'html2canvas';
 import { isMediaMobile } from '@/utils/index.js';
 
 export default {
-  name: 'Home',
+  name: 'Jigsaw',
   components: {
     Draggable
   },
@@ -216,9 +216,8 @@ export default {
     display: flex;
     margin-bottom: 0.32rem;
   }
-  .home {
+  .jigsaw {
     height: 100vh;
-    background: #ecf5ff;
     font-size: 0.37rem;
     padding-top: 0.53rem;
     box-sizing: border-box;
@@ -314,7 +313,7 @@ export default {
     display: flex;
     margin-bottom: 12px;
   }
-  .home {
+  .jigsaw {
     max-width: 100vw;
     min-height: 100vh;
     display: flex;
