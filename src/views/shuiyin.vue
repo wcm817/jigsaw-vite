@@ -58,7 +58,7 @@ export default {
   },
   data () {
     return {
-      waterMark: '正品潮玩盲盒现货店',
+      waterMark: 'xxxx',
       waterMarkObj: {
         canvas: null, //canvas  [必传]
         textArray: [], // /水印文字 数组类型  最大三行  [必传]

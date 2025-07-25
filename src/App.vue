@@ -1,5 +1,7 @@
 <template>
   <div class="nav">
+    <router-link :to="{ path: '/fabric' }">fabric demo</router-link>
+    <router-link :to="{ path: '/design' }">图文编辑器</router-link>
     <router-link :to="{ path: '/jigsaw' }">九宫格</router-link>
     <router-link :to="{ path: '/shuiyin' }">水印图</router-link>
   </div>

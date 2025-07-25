@@ -6,7 +6,15 @@ import JigSaw from '@/views/jigsaw.vue';
 const routes = [
   {
     path: '/',
-    redirect: '/jigsaw'
+    redirect: '/fabric'
+  },
+  {
+    path: '/fabric',
+    component: () => import('@/views/FabricDemo.vue')
+  },
+  {
+    path: '/design',
+    component: () => import('@/views/GraphicDesign.vue')
   },
   {
     path: '/jigsaw',
@@ -14,7 +22,7 @@ const routes = [
   },
   {
     path: '/shuiyin',
-    component: () => import('../views/shuiyin.vue')
+    component: () => import('@/views/ShuiYin.vue')
   }
 ];
 
