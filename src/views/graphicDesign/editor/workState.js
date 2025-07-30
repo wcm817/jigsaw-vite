@@ -1,8 +1,10 @@
 import { fabric } from 'fabric';
 import Base from "./base";
+import { throttle } from '@/utils/index.js';
 export default class WorkState extends Base {
     constructor (props) {
         super (props);
+        this.workState = null;
         this.lastPosX = null;
         this.lastPosY = null;
         this.isDraging = false; // 移动标志
@@ -10,6 +12,7 @@ export default class WorkState extends Base {
           width: 900,
           height: 1200
         };
+        this.resizeObserver = null;
     }
     // 初始化工作舞台
     initWorkState (workStateOption) {
@@ -38,6 +41,14 @@ export default class WorkState extends Base {
       this._setZoomAuto();
       this._bindWheel(this.canvasInstance);
       this._bindMove(this.canvasInstance);
+      this._resizeObeserve();
+    }
+
+    _resizeObeserve () {
+      this.resizeObserver = new ResizeObserver(throttle(() => {
+        this._setZoomAuto();
+      }, 50));
+      this.resizeObserver.observe(this.workspaceEl);
     }
 
     // 自动缩放
@@ -104,7 +115,6 @@ export default class WorkState extends Base {
           this.isDraging = false;
         })
     }
-    
     // 放大
     big() {
         let zoomRatio = this.canvasInstance.getZoom();
@@ -122,7 +132,6 @@ export default class WorkState extends Base {
             zoomRatio < 0 ? 0.01 : zoomRatio
         );
     }
-
     // 修改大小
     setWorkStateSize(width, height) {
       this.stateOption.width = width;
@@ -140,6 +149,7 @@ export default class WorkState extends Base {
     // 设置舞台背景色
     setBackgroudColor (color) {
       this.workState.set('fill', color);
+      this.canvasInstance.requestRenderAll();
     }
 
     // 设置舞台背景图片
@@ -186,5 +196,10 @@ export default class WorkState extends Base {
       if (bgImage) {
         this.canvasInstance.remove(bgImage);
       }
+    }
+    
+    destroyWorkState () {
+      this.resizeObserver.disconnect();
+      this.canvasInstance.off();
     }
 }

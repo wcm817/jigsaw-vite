@@ -12,6 +12,9 @@
 .nav {
   text-align: center;
   background-color: #fff;
+  border-bottom: 1px solid #e2e2e2;
+  box-sizing: border-box;
+  height: 36px;
   a {
     display: inline-block;
     padding: 6px 16px;

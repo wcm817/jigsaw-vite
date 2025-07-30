@@ -1,0 +1,121 @@
+{
+  "id": "4986290",
+  "name": "jigsaw",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "图片管理工具",
+  "glyphs": [
+    {
+      "icon_id": "17411825",
+      "name": "arrow",
+      "font_class": "ArrowDownLeft-1",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "20112507",
+      "name": "bx-circle",
+      "font_class": "bx-circle",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "20112874",
+      "name": "bx-rectangle",
+      "font_class": "bx-rectangle",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "23566725",
+      "name": "SAVE_TEMPLATE",
+      "font_class": "SAVE_TEMPLATE",
+      "unicode": "ea45",
+      "unicode_decimal": 59973
+    },
+    {
+      "icon_id": "36737871",
+      "name": "h1",
+      "font_class": "h1",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "39180843",
+      "name": "editor-background",
+      "font_class": "editor-background",
+      "unicode": "e7cc",
+      "unicode_decimal": 59340
+    },
+    {
+      "icon_id": "88071",
+      "name": "pen",
+      "font_class": "pen",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "712315",
+      "name": "A",
+      "font_class": "icon-class-a",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "1138728",
+      "name": "line",
+      "font_class": "line",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "4766917",
+      "name": "image",
+      "font_class": "image",
+      "unicode": "e7de",
+      "unicode_decimal": 59358
+    },
+    {
+      "icon_id": "5692878",
+      "name": "bx-triangle",
+      "font_class": "bx-triangle",
+      "unicode": "ecc0",
+      "unicode_decimal": 60608
+    },
+    {
+      "icon_id": "6900737",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "7213103",
+      "name": "Text",
+      "font_class": "Text",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "11976283",
+      "name": "h2",
+      "font_class": "h",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "12578985",
+      "name": "text-size",
+      "font_class": "text-size",
+      "unicode": "e702",
+      "unicode_decimal": 59138
+    },
+    {
+      "icon_id": "4766959",
+      "name": "edit",
+      "font_class": "edit",
+      "unicode": "e7e1",
+      "unicode_decimal": 59361
+    }
+  ]
+}

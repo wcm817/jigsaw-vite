@@ -1,1 +1,30 @@
-@import './base.scss';
+@use './base.scss';
+@import './iconfont/iconfont.css';
+
+.dx {
+  display: flex;
+}
+
+.flex-1{
+  flex: 1;
+}
+.justify-c-sb{
+  justify-content: space-between;
+}
+.justify-c-c {
+  justify-content: center;
+}
+
+.align-i-c {
+  align-items: center;
+}
+
+.btn {
+  height: 36px;
+  line-height: 35px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f6f6f6;
+}

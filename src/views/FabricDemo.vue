@@ -28,7 +28,7 @@
 
 <script>
 import { fabric } from 'fabric';
-import { Editor } from './graphicDesign/editor';
+import Editor from './graphicDesign/editor/editor';
 export default {
   components: {},
   data () {

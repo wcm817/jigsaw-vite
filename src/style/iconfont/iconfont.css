@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4986290 */
+  src: url('iconfont.woff2?t=1753772056409') format('woff2'),
+       url('iconfont.woff?t=1753772056409') format('woff'),
+       url('iconfont.ttf?t=1753772056409') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ArrowDownLeft-1:before {
+  content: "\e60f";
+}
+
+.icon-bx-circle:before {
+  content: "\e637";
+}
+
+.icon-bx-rectangle:before {
+  content: "\e668";
+}
+
+.icon-SAVE_TEMPLATE:before {
+  content: "\ea45";
+}
+
+.icon-h1:before {
+  content: "\e61c";
+}
+
+.icon-editor-background:before {
+  content: "\e7cc";
+}
+
+.icon-pen:before {
+  content: "\e600";
+}
+
+.icon-icon-class-a:before {
+  content: "\e652";
+}
+
+.icon-line:before {
+  content: "\e636";
+}
+
+.icon-image:before {
+  content: "\e7de";
+}
+
+.icon-bx-triangle:before {
+  content: "\ecc0";
+}
+
+.icon-add:before {
+  content: "\e60b";
+}
+
+.icon-Text:before {
+  content: "\e673";
+}
+
+.icon-h:before {
+  content: "\e61a";
+}
+
+.icon-text-size:before {
+  content: "\e702";
+}
+
+.icon-edit:before {
+  content: "\e7e1";
+}
+
