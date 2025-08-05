@@ -11,10 +11,12 @@
 <script>
 import MenuBar from './left/MenuBar.vue';
 import DefaultTemp from './left/DefaultTemp.vue';
+import BgTemp from './left/BgTemp.vue';
 export default {
     components: {
         MenuBar,
-        DefaultTemp
+        DefaultTemp,
+        BgTemp
     },
     data () {
         return {

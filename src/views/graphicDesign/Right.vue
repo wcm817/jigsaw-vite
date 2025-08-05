@@ -1,9 +1,18 @@
 <template>
   <div class="right" :class="showContent ? 'show-content' : ''">
     <div class="content" v-show="showContent">
-      <screen-size></screen-size>
-      <screen-image></screen-image>
-      <bg-color></bg-color>
+      <template v-if="!selectMode">
+        <div class="type-tile">背景设置</div>
+        <screen-size></screen-size>
+        <screen-image></screen-image>
+        <bg-color></bg-color>
+      </template>
+      <template v-if="selectMode === 'one'">
+        <div class="type-tile">元素设置</div>
+        <bg-color></bg-color>
+        <bound></bound>
+        <border></border>
+      </template>
     </div>
     <div class="arrow left-btn" :class="showContent ? 'left-btn-open' : ''" @click="() => showContent = !showContent"></div>
   </div>
@@ -13,27 +22,44 @@
 import ScreenSize from './right/ScreenSize.vue';
 import ScreenImage from './right/ScrrenImage.vue'
 import BgColor from './right/BgColor.vue';
+import Bound from './right/Bound.vue';
+import Border from './right/Border.vue';
+import canvasEditor from '@/mixins/canvasEditor.js';
 export default {
-  props: {
-    editor: {
-      type:  Object,
-      require: true
-    }
-  },
+  mixins: [canvasEditor],
   components: {
     ScreenSize,
     ScreenImage,
-    BgColor
+    BgColor,
+    Bound,
+    Border
   },
   data () {
     return {
       showContent: true,
+      selectMode: '',
+      selectType: '',
     };
   },
   computed: {
   },
   created () {},
-  mounted () {},
+  mounted () {
+    this.$nextTick(() => {
+      this.canvasEditor.on('select-one', ({ actives }) => {
+        this.selectMode = 'one';
+        this.selectType = actives[0].type;
+      });
+      this.canvasEditor.on('select-multiple', ({ actives }) => {
+        this.selectMode = 'multiple';
+        this.selectType = '';
+      });
+      this.canvasEditor.on('select-cancel', () => {
+        this.selectMode = '';
+        this.selectType = '';
+      });
+    });
+  },
   methods: {
     
   }
@@ -71,13 +97,53 @@ export default {
           background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAACACAMAAABOb9vcAAAAhFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAADHx8cODg50dHTx8fF2dnZ1dXWWlpZHR0c4ODhQpkZ5AAAAIXRSTlMA9t+/upkRAnPq5NXDfDEsKQjMeGlRThkMsquljTwzIWhBHpjgAAABJElEQVRYw+3YyW7CQBCEYbxig8ELGJyQkJRJyPb+75dj3zy/lD7kMH3+ZEuzSFO1mlZwhjOE2uwhVHJYMygNVwilhz2EUvNaMigledUFoE1anKYAtA9nVRuANpviOQBt0t2ZQSnZ9QxK6Qih9LSGUHkJobYlhGp6CPW4hlAVhckLhMop1InCjEK1FBYU1hSqo/BI4YXCjMIthTWFijDCCB3g7fuO4O1t/rkvQXPz/LUIzX0oAM0tQHOfCkBzC9DcuwLQXACao9Dv1yb9lsek2xaaxMcMH1x6Ff79dY0wwgj/DGv3p2tG4cX9wd55h4rCO/hk3uEs9w6QlXPIbXrfIJ6XrmVBOtJCA1YkXqVLkh1aUgyNk1fV1BxLxzpsuNLKzrME/AWr0ywwvyj83AAAAABJRU5ErkJggg==);
         }
     }
-    ::v-deep .attr-item-box{
+    .type-tile{
+      position: relative;
+      z-index: 1;
+      background-color: #fff;
+      height: 38px;
+      line-height: 37px;
+      border-bottom: 1px solid #e2e2e2;
+      box-sizing: border-box;
+      font-weight: 600;
+      padding: 0 16px;
+      box-shadow: 0px 1px 10px 1px rgba(0,0,0,0.06);
+    }
+    ::v-deep(.attr-item-box){
       background-color: #fff;
       padding: 16px;
       margin-bottom: 10px;
       .title {
-        padding-bottom: 10px;
+        padding-bottom: 14px;
       }
+      .row{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        .item-1{
+          width: 100%;
+          display: flex;
+        }
+        .item-2{
+          display: flex;
+          width: calc(50% - 5px);
+          margin-right: 5px;
+          &:last-child{
+            margin-right: 0;
+          }
+          .value{
+            flex: 1;
+          }
+        }
+        .label {
+          flex-shrink: 0;
+          margin-right: 4px;
+        }
+        .el-select{
+          flex: 1;
+        }
+      }
+      
     }
 }
 </style>

@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import provideData from '@/mixins/provideData.js';
+import canvasEditor from '@/mixins/canvasEditor.js';
 export default {
-  mixins: [provideData],
+  mixins: [canvasEditor],
   components: {},
   data () {
     return {
@@ -79,7 +79,8 @@ export default {
     }
   },
   created () {},
-  mounted () {},
+  mounted () {
+  },
   methods: {
     selectSize (item, index) {
       this.sizeIndex = index;

@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "electron-reload": "^2.0.0-alpha.1",
-    "element-plus": "^2.4.4",
+    "element-plus": "^2.7.4",
     "fabric": "^4.5.0",
     "html2canvas": "^1.4.1",
     "jszip": "^3.10.1",
+    "mitt": "^3.0.1",
     "vue": "^3.3.11",
     "vue-color": "^3.3.1",
     "vue-router": "^4.2.5",

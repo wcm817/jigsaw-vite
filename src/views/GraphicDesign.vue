@@ -14,7 +14,7 @@
 import Left from '@/views/graphicDesign/left.vue';
 import Right from '@/views/graphicDesign/right.vue';
 import { fabric } from 'fabric';
-import Editor from '@/views/graphicDesign/editor/editor';
+import Editor from '@/views/graphicDesign/editor/index';
 import { provide, markRaw } from 'vue';
 export default {
   provide () {
@@ -48,7 +48,7 @@ export default {
       // 在Vue3项目中，使用fabric:5.3.0和vue:3.3.4版本时，矩形和多边形无法缩放的问题, Fabricjs 不喜欢将 Canvas 作为proxy代理。使用markRaw解决
       this.canvasInstance = markRaw(new fabric.Canvas('c1'));
       this.editor = new Editor(this.canvasInstance);
-      this.editor.init( this.option);
+      this.editor.init(this.option);
       provide('fabric', fabric);
       provide('canvasEditor', this.editor);
     },
@@ -63,8 +63,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   .center{
-    flex: 1;
-    width: 100%;
+    width: calc(100% - 335px * 2);
     height: 100%;
   }
 }

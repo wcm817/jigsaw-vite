@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import emitter from '@/utils/eventBus';
 export default {
   components: {},
   data () {
@@ -27,14 +28,22 @@ export default {
       ]
     };
   },
-  created () {},
+  created () {
+  },
+  destroyed () {
+    emitter.off('set-bg-menu');
+  },
   mounted () {
-    this.$emit('changeMenu', this.list[this.activeMenu]);
+    this.$emit('change-menu', this.list[this.activeMenu]);
+    emitter.on('set-bg-menu', () => {
+      this.activeMenu = 3;
+      this.$emit('change-menu', this.list[this.activeMenu]);
+    });
   },
   methods: {
     clickHandler (index, item) {
       this.activeMenu = index;
-      this.$emit('changeMenu', item);
+      this.$emit('change-menu', item);
     }
   }
 };

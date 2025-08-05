@@ -24,9 +24,9 @@
 
 <script>
 import TextLine from '@/components/TextLine.vue';
-import provideData from '@/mixins/provideData.js';
+import canvasEditor from '@/mixins/canvasEditor.js';
 export default {
-  mixins: [provideData],
+  mixins: [canvasEditor],
   components: {
     TextLine
   },

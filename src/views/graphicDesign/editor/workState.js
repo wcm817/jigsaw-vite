@@ -1,9 +1,9 @@
 import { fabric } from 'fabric';
-import Base from "./base";
 import { throttle } from '@/utils/index.js';
-export default class WorkState extends Base {
-    constructor (props) {
-        super (props);
+export default class WorkState  {
+    constructor (canvas) {
+        this.canvasInstance = canvas;
+        this.zoomRadio = 0.85;
         this.workState = null;
         this.lastPosX = null;
         this.lastPosY = null;
@@ -65,6 +65,7 @@ export default class WorkState extends Base {
         this.canvasInstance.setViewportTransform(fabric.iMatrix.concat());
         this.canvasInstance.zoomToPoint(new fabric.Point(center.left, center.top), scale * this.zoomRadio);
         this._setCenterFromObject(this.workState, this.canvasInstance);
+        this.canvasInstance.renderAll();
     }
 
     // 设置画布中心到指定对象中心点上
@@ -74,6 +75,7 @@ export default class WorkState extends Base {
         if (canvas.width === undefined || canvas.height === undefined || !viewportTransform) return;
         viewportTransform[4] = canvas.width / 2 - objCenter.x * viewportTransform[0];
         viewportTransform[5] = canvas.height / 2 - objCenter.y * viewportTransform[3];
+        canvas.setViewportTransform(viewportTransform);
     }
     // 监听画布的鼠标滚动事件
     _bindWheel (canvas) {
@@ -154,40 +156,37 @@ export default class WorkState extends Base {
 
     // 设置舞台背景图片
     setBackgroudImage (imgUrl) {
-      const bgImage = this.getWorkBgImage();
-      if (!bgImage) {
-        this.canvasInstance.remove(bgImage);
-      }
-      fabric.Image.fromURL(imgUrl, (img) => {
-        const { width, height } = this.workState;
-        let scale = 1;
-        if (width > img.width || height > img.height) {
-          scale = (width / img.width) > (height / img.height) ? (width / img.width) : (height / img.height);
-        }
-        // 居中处理
-        const bgHeight = img.height * scale;
-        const bgWidth = img.width * scale;
-        const bgLeft = width / 2 - bgWidth / 2;
-        const bgTop = height / 2 - bgHeight / 2;
-        img.set({
-          left: bgLeft,
-          top: bgTop,
-          scaleX: scale,
-          scaleY: scale,
-          hasControls: false,
-          hasBorders: false,
-          selectable: false,
-          lockMovementX: true,
-          lockMovementY: true,
-          hoverCursor: 'default',
-          name: '舞台背景图片',
-          id: 'workBackgroungImage'
+      this.removeBackgroundImage();
+        fabric.Image.fromURL(imgUrl, (img) => {
+          const { width, height } = this.workState;
+          let scale = 1;
+          if (width > img.width || height > img.height) {
+            scale = (width / img.width) > (height / img.height) ? (width / img.width) : (height / img.height);
+          }
+          // 居中处理
+          const bgHeight = img.height * scale;
+          const bgWidth = img.width * scale;
+          const bgLeft = width / 2 - bgWidth / 2;
+          const bgTop = height / 2 - bgHeight / 2;
+          img.set({
+            left: bgLeft,
+            top: bgTop,
+            scaleX: scale,
+            scaleY: scale,
+            hasControls: false,
+            hasBorders: false,
+            selectable: false,
+            lockMovementX: true,
+            lockMovementY: true,
+            hoverCursor: 'default',
+            name: '舞台背景图片',
+            id: 'workBackgroungImage'
+          });
+          this.canvasInstance.add(img);
+          this.canvasInstance.sendToBack(img);
+          this.canvasInstance.bringForward(img);
+          this.canvasInstance.requestRenderAll();
         });
-        this.canvasInstance.add(img);
-        this.canvasInstance.sendToBack(img);
-        this.canvasInstance.bringForward(img);
-        this.canvasInstance.requestRenderAll();
-      });
     }
 
     // 删除舞台背景图片
@@ -200,6 +199,5 @@ export default class WorkState extends Base {
     
     destroyWorkState () {
       this.resizeObserver.disconnect();
-      this.canvasInstance.off();
     }
 }

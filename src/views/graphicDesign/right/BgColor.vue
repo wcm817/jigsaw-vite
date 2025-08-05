@@ -1,6 +1,6 @@
 <template>
 <div class="attr-item-box">
-  <div class="title">背景颜色</div>
+  <div class="title">颜色</div>
   <div class="color-box" @click="show = true" v-click-out="() => show = false">
     <div class="color" :style="{backgroundColor: hexColor }"></div>
     <sketch-picker class="selector" v-model="color" v-show="show"></sketch-picker>
@@ -10,9 +10,9 @@
 
 <script>
 import { SketchPicker, tinycolor } from 'vue-color';
-import provideData from '@/mixins/provideData';
+import canvasEditor from '@/mixins/canvasEditor';
 export default {
-  mixins: [provideData],
+  mixins: [canvasEditor],
   components: {
     SketchPicker
   },
@@ -25,7 +25,7 @@ export default {
   watch: {
     color: {
       handler() {
-        this.canvasEditor.state.setBackgroudColor(this.color);
+        this.canvasEditor.setActiveObjectColor(this.color);
       },
       deep: true
     }
@@ -57,6 +57,7 @@ export default {
     position: absolute;
     top: 40px;
     left: 0px;
+    z-index: 999;
   }
 }
 </style>

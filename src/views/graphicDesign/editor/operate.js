@@ -1,13 +1,13 @@
 import { fabric } from 'fabric';
-import Base from './base';
-export default class Operate extends Base {
-  constructor (props) {
-    super (props);
+export default class Operate  {
+  constructor (canvas) {
+    this.canvasInstance = canvas;
   }
 
   createFabricObj (type, options) {
     let obj;
     const baseOptions = {
+      type,
       fill: '#d3e6f599',
       // selectable: true, // 确保可以选中
       // lockScalingX: true, // 允许水平缩放

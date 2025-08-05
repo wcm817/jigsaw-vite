@@ -28,7 +28,7 @@
 
 <script>
 import { fabric } from 'fabric';
-import Editor from './graphicDesign/editor/editor';
+import Editor from './graphicDesign/editor/index';
 export default {
   components: {},
   data () {
@@ -46,16 +46,16 @@ export default {
   methods: {
     init () {
       this.canvasInstance = new fabric.Canvas('f1');
-      this.editor = new Editor();
-      this.editor.init(this.canvasInstance, this.option);
-      this.editor.setBackgroudImage('/spring.png');
+      this.editor = new Editor(this.canvasInstance);
+      this.editor.init(this.option);
+      this.editor.state.setBackgroudImage('/spring.png');
     },
     setStateSizeHandler () {
-      this.editor.setWorkStateSize(this.option.width, this.option.height);
+      this.editor.state.setWorkStateSize(this.option.width, this.option.height);
     },
     changeBackgoundColor () {
-      this.editor.removeBackgroundImage()
-      this.editor.setBackgroudColor(this.bgColor);
+      this.editor.state.removeBackgroundImage()
+      this.editor.state.setBackgroudColor(this.bgColor);
     }
   }
 };
